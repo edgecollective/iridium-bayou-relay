@@ -26,10 +26,10 @@ function toArrayBuffer(buf) {
     return ab;
 }
 
-let s = struct("<6f")
-let record = toArrayBuffer(Buffer.from("982f854090673f43bc35bb410028cf4188577d44646ccf41", "hex"));
-let results = s.unpack(record)
-console.log(results)
+//let s = struct("<6f")
+//let record = toArrayBuffer(Buffer.from("982f854090673f43bc35bb410028cf4188577d44646ccf41", "hex"));
+//let results = s.unpack(record)
+//console.log(results)
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -40,6 +40,15 @@ app.post('/', (req,res) => {
 	console.log(req.body.imei);
 	if (req.body.imei===imei) {
 	console.log('match!')
+
+	var input = req.body.data;
+	const output = Buffer.from(input,'hex');
+	console.log('as text:',output.toString());
+
+	let s = struct("<2f");
+	let record = toArrayBuffer(Buffer.from(input, "hex"));
+	let results = s.unpack(record);
+	console.log('as packed:',results);
 	}
 
 	res.status(200).send('relayed!');
