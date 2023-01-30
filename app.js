@@ -16,6 +16,10 @@ app.post('/', (req,res) => {
 	console.log('yes!');
 	console.log(req.body);
 	console.log(req.body.imei);
+	if (req.body.imei===imei) {
+	console.log('match!')
+	}
+
 	res.status(200).send('relayed!');
 });
 
