@@ -1,0 +1,23 @@
+{
+  "name": "iridium-bayou-relay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edgecollective/iridium-bayou-relay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edgecollective/iridium-bayou-relay/issues"
+  },
+  "homepage": "https://github.com/edgecollective/iridium-bayou-relay#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "request": "^2.88.2"
+  }
+}
