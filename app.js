@@ -11,6 +11,9 @@ import bodyParser from 'body-parser';
 const port = 4000
 
 const imei = '300234065897350';
+const pubkey = '2ifhwi34ue4j';
+const privkey = 'kqr77cc39hdm';
+
 import struct from './struct.mjs';
 
 app.get('/', (req, res) => {
@@ -32,7 +35,9 @@ function toArrayBuffer(buf) {
 //console.log(results)
 
 
-app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 
 app.post('/', (req,res) => {
 	console.log('yes!');
@@ -49,6 +54,8 @@ app.post('/', (req,res) => {
 	let record = toArrayBuffer(Buffer.from(input, "hex"));
 	let results = s.unpack(record);
 	console.log('as packed:',results);
+	console.log('batt:',results[0]);
+	console.log('depth:',results[1]);
 	}
 
 	res.status(200).send('relayed!');
