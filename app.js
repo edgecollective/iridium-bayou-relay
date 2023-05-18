@@ -49,16 +49,16 @@ app.post('/', (req,res) => {
 	var input = req.body.data;
 	const output = Buffer.from(input,'hex');
 	console.log('as text:',output.toString());
-
-	let s = struct("<2f");
+	let s = struct("<fii");
 	let record = toArrayBuffer(Buffer.from(input, "hex"));
 	let results = s.unpack(record);
 	console.log('as packed:',results);
 	console.log('batt:',results[0]);
 	console.log('depth:',results[1]);
+	console.log('retries:',results[2]);
 
 	var post_url = 'http://bayou.pvos.org/data/'+pubkey;
-	request.post(post_url,{json:{'private_key':privkey,'distance_meters':results[1],'battery_volts':results[0] }},
+	request.post(post_url,{json:{'private_key':privkey,'distance_meters':results[1]/1000.,'battery_volts':results[0],'aux_1':results[2] }},
 		function (error,response,body) {
 			if (!error && response.statusCode ==200) {
 				console.log(body);
@@ -81,3 +81,4 @@ app.listen(port, () => {
 	  console.log(`Example app listening on port ${port}`)
 })
 
+export default app;
