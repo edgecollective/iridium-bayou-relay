@@ -11,8 +11,8 @@ import bodyParser from 'body-parser';
 const port = 4000
 
 const imei = '300234065897350';
-const pubkey = '2ifhwi34ue4j';
-const privkey = 'kqr77cc39hdm';
+const pubkey = 'gcr565avyan2';
+const privkey = 'g6tcs7gcdr5v';
 
 import struct from './struct.mjs';
 
@@ -58,7 +58,7 @@ app.post('/', (req,res) => {
 	console.log('retries:',results[2]);
 
 	var post_url = 'http://bayou.pvos.org/data/'+pubkey;
-	request.post(post_url,{json:{'private_key':privkey,'distance_meters':results[1]/1000.,'battery_volts':results[0],'aux_1':results[2] }},
+	request.post(post_url,{json:{'private_key':privkey,'distance_meters':results[1]/1000.,'battery_volts':results[0],'aux_1':results[2],'node_id':1 }},
 		function (error,response,body) {
 			if (!error && response.statusCode ==200) {
 				console.log(body);
