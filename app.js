@@ -49,16 +49,18 @@ app.post('/', (req,res) => {
 	var input = req.body.data;
 	const output = Buffer.from(input,'hex');
 	console.log('as text:',output.toString());
-	let s = struct("<fii");
+	let s = struct("<fiifi");
 	let record = toArrayBuffer(Buffer.from(input, "hex"));
 	let results = s.unpack(record);
 	console.log('as packed:',results);
 	console.log('batt:',results[0]);
 	console.log('depth:',results[1]);
 	console.log('retries:',results[2]);
+	console.log('temperature:',results[3]);
+	console.log('error_log:',results[4]);			
 
 	var post_url = 'http://bayou.pvos.org/data/'+pubkey;
-	request.post(post_url,{json:{'private_key':privkey,'distance_meters':results[1]/1000.,'battery_volts':results[0],'aux_1':results[2],'node_id':1 }},
+	request.post(post_url,{json:{'private_key':privkey,'aux_2':results[4],'temperature_c':results[3],'distance_meters':results[1]/100.,'battery_volts':results[0],'aux_1':results[2],'node_id':1 }},
 		function (error,response,body) {
 			if (!error && response.statusCode ==200) {
 				console.log(body);
